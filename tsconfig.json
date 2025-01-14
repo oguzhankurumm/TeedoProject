@@ -1,6 +1,37 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "strict": true
-  }
+    "lib": ["ES7"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "strict": true,
+    "baseUrl": ".",
+    "types": ["node"],
+    "paths": {
+      "_assets/*": ["./src/assets/*"],
+      "_atoms": ["./src/components/atoms"],
+      "_molecules": ["./src/components/molecules"],
+      "_organisms": ["./src/components/organisms"],
+      "_hooks/*": ["./src/hooks/*"],
+      "_locales/*": ["./src/locales/*"],
+      "_modals": ["src/modals"],
+      "_navigations/*": ["./src/navigations/*"],
+      "_scenes/*": ["./src/scenes/*"],
+      "_styles/*": ["./src/styles/*"],
+      "_types/*": ["./src/types/*"],
+      "_utils/*": ["./src/utils/*"]
+    }
+  },
+  "exclude": ["node_modules"]
 }
+

@@ -3,10 +3,20 @@
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web"
+    "start": "npx expo start",
+    "start-tunnel": "npx expo start --tunnel",
+    "android-dev": "npx expo start --android",
+    "ios-dev": "npx expo start --ios",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "web": "expo start --web",
+    "test": "jest -u",
+    "format:check": "prettier ./src --check",
+    "lint:check": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "type:check": "tsc --noEmit",
+    "lint-errors": "prettier -c --write .  && eslint . --ext .js,.jsx,.ts,.tsx --fix --quiet",
+    "lint": "prettier -c --write . && eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "prebuild": "npx expo prebuild --clean"
   },
   "dependencies": {
     "expo": "~52.0.25",
@@ -16,7 +26,13 @@
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
+    "@trivago/prettier-plugin-sort-imports": "^5.2.1",
     "@types/react": "~18.3.12",
+    "@typescript-eslint/parser": "^8.20.0",
+    "eslint": "^9.18.0",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-prettier": "^5.2.1",
+    "prettier": "^3.4.2",
     "typescript": "^5.3.3"
   },
   "private": true
