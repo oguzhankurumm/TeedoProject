@@ -19,6 +19,7 @@
     "prebuild": "npx expo prebuild --clean"
   },
   "dependencies": {
+    "@callstack/react-theme-provider": "^3.0.9",
     "expo": "~52.0.25",
     "expo-status-bar": "~2.0.1",
     "react": "18.3.1",
