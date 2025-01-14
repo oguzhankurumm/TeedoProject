@@ -7,7 +7,7 @@ This is a React Native Mobile App Course Project.
 Node 14 or newer is required. Development for iOS requires a Mac and Xcode, and will target iOS 12.4 and up.
 
 You also need to install the dependencies required by React Native.  
-Go to the [React Native environment setup](https://reactnative.dev/docs/environment-setup), then select `Expo Go Quickstart` tab.  
+Go to the [React Native environment setup](https://docs.expo.dev/get-started/set-up-your-environment), then select `Expo Go Quickstart` tab.  
 Follow the instructions.
 
 ## Quick start
