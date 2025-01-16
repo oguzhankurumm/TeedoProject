@@ -1,3 +1,3 @@
-import CustomTextInput from './CustomTextInput/CustomTextInput.component';
+import CustomButton from './CustomButton/CustomButton.component';
 
-export { CustomTextInput };
+export { CustomButton };
