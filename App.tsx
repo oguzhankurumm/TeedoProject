@@ -1,23 +1,14 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native';
 
 import { StatusBar } from 'expo-status-bar';
 
-import { CustomTextInput } from '_atoms';
+import Home from '_scenes/Home/Home.component';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Hello</Text>
+    <SafeAreaView style={{ flex: 1 }}>
       <StatusBar style='auto' />
-    </View>
+      <Home />
+    </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
