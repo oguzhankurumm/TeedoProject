@@ -1,10 +1,13 @@
+import { useCallback } from 'react';
+
 import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import Scenes from '_navigations/Scenes';
 import { ProductType } from '_types/product';
 
 const useProducts = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
 
   const products = [
     {
@@ -27,9 +30,12 @@ const useProducts = () => {
     },
   ];
 
-  const handleOnProductPress = (item: ProductType) => {
-    navigation.navigate(Scenes.productDetails, { product: item });
-  };
+  const handleOnProductPress = useCallback(
+    (item: ProductType) => {
+      navigation.navigate(Scenes.productDetails, { product: item });
+    },
+    [navigation]
+  );
 
   return {
     products,
