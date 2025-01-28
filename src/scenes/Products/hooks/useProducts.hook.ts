@@ -11,7 +11,7 @@ const useProducts = () => {
 
   const products = [
     {
-      id: 11,
+      id: 11, // NUMBER
       title: 'Annibale Colombo Bed',
       price: 1899.99,
       description:
@@ -21,6 +21,24 @@ const useProducts = () => {
     },
     {
       id: 12,
+      title: 'Annibale Colombo Sofa',
+      price: 2499.99,
+      description:
+        'The Annibale Colombo Sofa is a sophisticated and comfortable seating option, featuring exquisite design and premium upholstery for your living room.',
+      image: 'https://cdn.dummyjson.com/products/images/furniture/Annibale%20Colombo%20Sofa/1.png',
+      rating: 3.08,
+    },
+    {
+      id: 13,
+      title: 'Annibale Colombo Sofa',
+      price: 2499.99,
+      description:
+        'The Annibale Colombo Sofa is a sophisticated and comfortable seating option, featuring exquisite design and premium upholstery for your living room.',
+      image: 'https://cdn.dummyjson.com/products/images/furniture/Annibale%20Colombo%20Sofa/1.png',
+      rating: 3.08,
+    },
+    {
+      id: 14,
       title: 'Annibale Colombo Sofa',
       price: 2499.99,
       description:
