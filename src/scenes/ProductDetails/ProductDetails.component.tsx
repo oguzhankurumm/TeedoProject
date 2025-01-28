@@ -1,4 +1,4 @@
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, Platform } from 'react-native';
 
 import { useRoute } from '@react-navigation/native';
 

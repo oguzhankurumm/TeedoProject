@@ -1,13 +1,51 @@
-import { StyleSheet } from 'react-native';
+import { Platform, Dimensions, StyleSheet } from 'react-native';
+
+import AppFonts from '_styles/typography';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     rowGap: 20,
   },
+  productContainer: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 10,
+    padding: 10,
+    rowGap: 10,
+  },
   productImage: {
-    width: '100%',
     aspectRatio: 16 / 9,
+  },
+  productTitle: {
+    ...AppFonts.semiBold,
+    fontSize: 16,
+    color: '#003566',
+  },
+  productDescription: {
+    ...AppFonts.regular,
+    fontSize: 12,
+    color: '#353535',
+  },
+  productBottomInfoContainer: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  productPrice: {
+    ...AppFonts.medium,
+    fontSize: 16,
+    color: Platform.OS === 'ios' ? '#ff9f1c' : '#ff4365',
+  },
+  productRatingContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    columnGap: 8,
+  },
+  productRating: {
+    ...AppFonts.medium,
+    fontSize: 16,
+    color: Platform.OS === 'ios' ? '#ff9f1c' : '#ff4365',
   },
 });
 

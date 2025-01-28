@@ -1,3 +1,5 @@
+import { Platform } from 'react-native';
+
 import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -21,6 +23,9 @@ const BottomNavBarStack = () => {
       screenOptions={({ route }) => ({
         headerShown: false,
         tabBarActiveTintColor: 'black',
+        tabBarStyle: {
+          height: Platform.OS === 'ios' ? 75 : 60,
+        },
         tabBarIcon: ({ focused }) => {
           let iconName: React.ComponentProps<typeof Ionicons>['name'] = 'home';
 
