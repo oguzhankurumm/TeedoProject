@@ -1,4 +1,5 @@
 import { Platform } from 'react-native';
+import { useSelector } from 'react-redux';
 
 import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -7,11 +8,14 @@ import Scenes from '_navigations/Scenes';
 import StackNames from '_navigations/StackNames';
 import ProductsStack from '_navigations/Stacks/ProductsStack';
 import ProfileStack from '_navigations/Stacks/ProfileStack';
+import { selectCartTotalQuantity } from '_redux/features/cart/cartSelectors';
 import Cart from '_scenes/Cart/Cart.component';
 
 const BottomNavBarStackNavigator = createBottomTabNavigator();
 
 const BottomNavBarStack = () => {
+  const cartTotalQuantity = useSelector(selectCartTotalQuantity);
+
   const renderTabIcon = (
     iconName: React.ComponentProps<typeof Ionicons>['name'],
     focused: boolean
@@ -57,6 +61,8 @@ const BottomNavBarStack = () => {
           tabBarLabel: 'Sepetim',
           headerShown: true,
           headerTitle: 'Sepetim',
+          tabBarBadge: cartTotalQuantity,
+          tabBarBadgeStyle: { display: cartTotalQuantity > 0 ? 'flex' : 'none' },
         }}
       />
       <BottomNavBarStackNavigator.Screen
