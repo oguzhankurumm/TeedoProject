@@ -10,6 +10,8 @@ module.exports = {
                     _docs: './__docs__/',
                     _tests: './__tests__/',
                     _assets: './src/assets',
+                    _data: './src/data',
+                    _redux: './src/redux',
                     // Diğer aliaslar buraya eklenebilir
                 },
             },
