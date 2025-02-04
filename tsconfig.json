@@ -26,6 +26,8 @@
       "_locales/*": ["./src/locales/*"],
       "_modals": ["src/modals"],
       "_navigations/*": ["./src/navigations/*"],
+      "_redux/*": ["./src/redux/*"],
+      "_data/*": ["./src/data/*"],
       "_scenes/*": ["./src/scenes/*"],
       "_styles/*": ["./src/styles/*"],
       "_types/*": ["./src/types/*"],

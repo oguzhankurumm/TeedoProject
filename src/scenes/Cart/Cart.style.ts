@@ -3,15 +3,34 @@ import { StyleSheet } from 'react-native';
 import AppFonts from '_styles/typography';
 
 const styles = StyleSheet.create({
+  contentContainer: {
+    rowGap: 20,
+    padding: 10,
+  },
+  listHeaderContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  listEmptyContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
+  },
   productContainer: {
-    flex: 1,
     backgroundColor: '#FFFFFF',
     borderRadius: 10,
     padding: 10,
     rowGap: 10,
   },
+  productTopInfoContainer: {
+    flexDirection: 'row',
+    columnGap: 10,
+  },
   productImage: {
-    aspectRatio: 16 / 9,
+    width: 100,
+    height: 100,
+    borderRadius: 10,
   },
   productTitle: {
     ...AppFonts.semiBold,
@@ -23,7 +42,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#353535',
   },
-  productBottomInfoContainer: {
+  productRowContainer: {
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -44,34 +63,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#353535',
   },
-  contentContainerStyle: {
-    rowGap: 10,
-    padding: 10,
-  },
-  columnWrapperStyle: {
-    justifyContent: 'space-between',
-    columnGap: 10,
-  },
-  emptyContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
-  },
-  cartQuantityContainer: {
+  productQuantityContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    backgroundColor: '#FFFFFF',
-    borderRadius: 100,
   },
-  cartQuantityText: {
-    ...AppFonts.regular,
-    marginHorizontal: 10,
-    fontSize: 16,
-  },
-  cartQuantityButtonContainer: {
+  productQuantityButtonContainer: {
     width: 30,
     height: 30,
     borderRadius: 15,
@@ -79,10 +75,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  addToCartButton: {
-    position: 'absolute',
-    top: 0,
-    right: 0,
+  productQuantityText: {
+    marginHorizontal: 10,
+    fontSize: 18,
   },
 });
 

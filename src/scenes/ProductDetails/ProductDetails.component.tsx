@@ -1,27 +1,30 @@
-import { View, Text, Image, Platform } from 'react-native';
+import { View, Text, Image } from 'react-native';
+import { useSelector } from 'react-redux';
 
-import { useRoute } from '@react-navigation/native';
-
-import { ProductType } from '_types/product';
+import { selectSelectedProduct } from '_redux/features/product/productSelectors';
 
 import styles from './ProductDetails.style';
 import useProductDetails from './hooks/useProductDetails.hook';
 
 const ProductDetails = () => {
-  const route = useRoute();
-
-  const productDataFromRoute = route.params as { product: ProductType };
-
-  const { title, description, image } = productDataFromRoute.product;
-
   const {} = useProductDetails();
-  const { container, productImage } = styles;
+  const product = useSelector(selectSelectedProduct);
+
+  const { container, productImage, productTitle, productDescription } = styles;
+
+  if (!product) {
+    return (
+      <View style={container}>
+        <Text style={productTitle}>Ürün bulunamadı.</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={container}>
-      <Image style={productImage} source={{ uri: image }} />
-      <Text>{title}</Text>
-      <Text>{description}</Text>
+      <Image style={productImage} source={{ uri: product.image }} />
+      <Text style={productTitle}>{product.title}</Text>
+      <Text style={productDescription}>{product.description}</Text>
     </View>
   );
 };

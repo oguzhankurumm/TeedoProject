@@ -17,14 +17,21 @@ const ProductsStack = () => {
     <ProductsStackNavigator.Navigator
       screenOptions={{
         title: 'Ürünler',
-        headerLeft: () => (
-          <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
-            <Ionicons name='menu' size={24} color='black' />
-          </TouchableOpacity>
-        ),
+        headerBackButtonDisplayMode: 'minimal',
+        headerTintColor: 'black',
       }}
     >
-      <ProductsStackNavigator.Screen name={Scenes.products} component={Products} />
+      <ProductsStackNavigator.Screen
+        name={Scenes.products}
+        component={Products}
+        options={{
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+              <Ionicons name='menu' size={24} color='black' />
+            </TouchableOpacity>
+          ),
+        }}
+      />
       <ProductsStackNavigator.Screen name={Scenes.productDetails} component={ProductDetails} />
     </ProductsStackNavigator.Navigator>
   );
