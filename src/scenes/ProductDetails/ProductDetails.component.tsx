@@ -10,7 +10,14 @@ const ProductDetails = () => {
   const {} = useProductDetails();
   const product = useSelector(selectSelectedProduct);
 
-  const { container, productImage, productTitle, productDescription } = styles;
+  const {
+    container,
+    productImage,
+    productInfoContainer,
+    productTitle,
+    productPrice,
+    productDescription,
+  } = styles;
 
   if (!product) {
     return (
@@ -23,7 +30,12 @@ const ProductDetails = () => {
   return (
     <View style={container}>
       <Image style={productImage} source={{ uri: product.image }} />
-      <Text style={productTitle}>{product.title}</Text>
+      <View style={productInfoContainer}>
+        <Text style={productTitle}>{product.title}</Text>
+        <Text style={productPrice}>
+          {Intl.NumberFormat('tr-TR', { style: 'currency', currency: 'TRY' }).format(product.price)}
+        </Text>
+      </View>
       <Text style={productDescription}>{product.description}</Text>
     </View>
   );
