@@ -32,7 +32,13 @@ const ProductsStack = () => {
           ),
         }}
       />
-      <ProductsStackNavigator.Screen name={Scenes.productDetails} component={ProductDetails} />
+      <ProductsStackNavigator.Screen
+        name={Scenes.productDetails}
+        component={ProductDetails}
+        options={{
+          title: 'Ürün Detayı',
+        }}
+      />
     </ProductsStackNavigator.Navigator>
   );
 };
