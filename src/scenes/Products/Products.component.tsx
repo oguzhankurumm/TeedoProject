@@ -93,7 +93,11 @@ const Products = () => {
             <Text style={productDescription}>{item.description}</Text>
 
             <View style={productBottomInfoContainer}>
-              <Text style={productPrice}>{item.price} TL</Text>
+              <Text style={productPrice}>
+                {Intl.NumberFormat('tr-TR', { style: 'currency', currency: 'TRY' }).format(
+                  item.price
+                )}
+              </Text>
 
               <View style={productRatingContainer}>
                 <Ionicons name='star' size={16} color='#353535' />
