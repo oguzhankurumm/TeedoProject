@@ -1,15 +1,21 @@
 import { Platform } from 'react-native';
+import { useSelector } from 'react-redux';
 
 import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+import Scenes from '_navigations/Scenes';
 import StackNames from '_navigations/StackNames';
 import ProductsStack from '_navigations/Stacks/ProductsStack';
 import ProfileStack from '_navigations/Stacks/ProfileStack';
+import { selectCartTotalQuantity } from '_redux/features/cart/cartSelector';
+import Cart from '_scenes/Cart/Cart.component';
 
 const BottomNavBarStackNavigator = createBottomTabNavigator();
 
 const BottomNavBarStack = () => {
+  const totalQuantity = useSelector(selectCartTotalQuantity);
+
   const renderTabIcon = (
     iconName: React.ComponentProps<typeof Ionicons>['name'],
     focused: boolean
@@ -33,6 +39,8 @@ const BottomNavBarStack = () => {
             iconName = 'home-outline';
           } else if (route.name === StackNames.profileStack) {
             iconName = 'person-outline';
+          } else if (route.name === Scenes.cart) {
+            iconName = 'cart-outline';
           }
 
           return renderTabIcon(iconName, focused);
@@ -44,6 +52,17 @@ const BottomNavBarStack = () => {
         component={ProductsStack}
         options={{
           tabBarLabel: 'Ürünler',
+        }}
+      />
+      <BottomNavBarStackNavigator.Screen
+        name={Scenes.cart}
+        component={Cart}
+        options={{
+          tabBarLabel: 'Sepetim',
+          headerShown: true,
+          headerTitle: 'Sepetim',
+          tabBarBadge: totalQuantity,
+          tabBarBadgeStyle: { display: totalQuantity > 0 ? 'flex' : 'none' },
         }}
       />
       <BottomNavBarStackNavigator.Screen

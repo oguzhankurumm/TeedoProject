@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
     rowGap: 20,
   },
   productContainer: {
+    flex: 1,
     backgroundColor: '#FFFFFF',
     borderRadius: 10,
     padding: 10,
@@ -46,6 +47,19 @@ const styles = StyleSheet.create({
     ...AppFonts.medium,
     fontSize: 16,
     color: Platform.OS === 'ios' ? '#ff9f1c' : '#ff4365',
+  },
+  contentContainerStyle: {
+    rowGap: 10,
+    padding: 10,
+  },
+  columnWrapperStyle: {
+    justifyContent: 'space-between',
+    columnGap: 10,
+  },
+  addToCartButton: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
   },
 });
 
