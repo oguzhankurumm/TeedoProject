@@ -1,8 +1,21 @@
-import { useEffect } from 'react';
-import { Alert } from 'react-native';
+import { useSelector } from 'react-redux';
+
+import { getSelectedProductInfo } from '_redux/features/product/productSelector';
+import { useGetSingleProductByIdQuery } from '_services/productServicesdata';
 
 const useProductDetails = () => {
-  return {};
+  const selectedProduct = useSelector(getSelectedProductInfo);
+  const {
+    data: productInfo,
+    isLoading,
+    error,
+  } = useGetSingleProductByIdQuery(selectedProduct || 0);
+
+  return {
+    productInfo,
+    isLoading,
+    error,
+  };
 };
 
 export default useProductDetails;

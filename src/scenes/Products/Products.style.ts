@@ -6,6 +6,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     rowGap: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   productContainer: {
     flex: 1,
@@ -15,7 +17,7 @@ const styles = StyleSheet.create({
     rowGap: 10,
   },
   productImage: {
-    aspectRatio: 16 / 9,
+    aspectRatio: 1 / 1.4,
   },
   productTitle: {
     ...AppFonts.semiBold,

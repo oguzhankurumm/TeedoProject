@@ -1,23 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface Product {
-  id: number;
-  title: string;
-  price: number;
-  image: string;
-  description: string;
-  rating: number;
-}
+import { ProductType } from '_types/product';
 
 interface ProductState {
-  products: Product[];
-  selectedProduct: Product | null;
+  products: ProductType[];
+  selectedProductId: number | null;
 }
 
 // STATE
 const initialState: ProductState = {
   products: [],
-  selectedProduct: null,
+  selectedProductId: null,
 };
 
 const productSlice = createSlice({
@@ -25,11 +18,11 @@ const productSlice = createSlice({
   initialState,
   reducers: {
     // Gerekli fonksiyonlarımızı buraya ekleyeceğiz.
-    setProducts(state, action: PayloadAction<Product[]>) {
+    setProducts(state, action: PayloadAction<ProductType[]>) {
       state.products = action.payload;
     },
-    selectProduct(state, action: PayloadAction<Product>) {
-      state.selectedProduct = action.payload;
+    selectProduct(state, action: PayloadAction<number>) {
+      state.selectedProductId = action.payload;
     },
   },
 });

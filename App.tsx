@@ -24,6 +24,10 @@ export default function App() {
     'Gabarito-SemiBold': require('_assets/fonts/Gabarito-SemiBold.ttf'),
   });
 
+  if (__DEV__) {
+    require('reactotron-config');
+  }
+
   if (!loaded && !error) {
     return null;
   }

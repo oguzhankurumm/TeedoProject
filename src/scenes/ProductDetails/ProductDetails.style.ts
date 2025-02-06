@@ -8,6 +8,11 @@ const styles = StyleSheet.create({
     rowGap: 20,
     padding: 20,
   },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   productImage: {
     width: '100%',
     aspectRatio: 16 / 9,

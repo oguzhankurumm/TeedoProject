@@ -1,4 +1,4 @@
-import { View, Text, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Ionicons } from '@expo/vector-icons';
@@ -12,10 +12,18 @@ import useProducts from './hooks/useProducts.hook';
 
 const Products = () => {
   const dispatch = useDispatch();
-  const { productList, handleOnProductPress, handleAddToCartPress } = useProducts();
+  const {
+    productList,
+    handleOnProductPress,
+    handleAddToCartPress,
+    handleGetNextItems,
+    error,
+    isLoading,
+  } = useProducts();
   const itemsInCart = useSelector(selectCartItems);
 
   const {
+    container,
     productContainer,
     productImage,
     productTitle,
@@ -29,6 +37,22 @@ const Products = () => {
     addToCartButton,
   } = styles;
 
+  if (isLoading) {
+    return (
+      <View style={container}>
+        <ActivityIndicator size='large' color='#000' />
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={container}>
+        <Text>Bir hata oluştu</Text>
+      </View>
+    );
+  }
+
   return (
     <FlatList
       data={productList}
@@ -36,6 +60,9 @@ const Products = () => {
       keyExtractor={item => item.id.toString()}
       contentContainerStyle={contentContainerStyle}
       columnWrapperStyle={columnWrapperStyle}
+      onEndReached={() => {
+        handleGetNextItems();
+      }}
       renderItem={({ item }) => {
         const currentItem = itemsInCart.find(cartItem => cartItem.id === item.id);
 
@@ -85,7 +112,7 @@ const Products = () => {
 
               <View style={productRatingContainer}>
                 <Ionicons name='star' size={16} color='#353535' />
-                <Text style={productRating}>{item.rating}</Text>
+                <Text style={productRating}>{item.rating.rate}</Text>
               </View>
             </View>
           </TouchableOpacity>

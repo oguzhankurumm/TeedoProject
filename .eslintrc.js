@@ -12,6 +12,7 @@ module.exports = {
                     _assets: './src/assets',
                     _data: './src/data',
                     _redux: './src/redux',
+                    _services: './src/services',
                     // Diğer aliaslar buraya eklenebilir
                 },
             },
