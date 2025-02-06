@@ -31,7 +31,8 @@
       "_styles/*": ["./src/styles/*"],
       "_types/*": ["./src/types/*"],
       "_utils/*": ["./src/utils/*"],
-      "_data/*": ["./src/data/*"]
+      "_data/*": ["./src/data/*"],
+      "_services/*data": ["./src/services/*"],
     }
   },
   "exclude": ["node_modules"]

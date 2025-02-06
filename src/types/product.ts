@@ -3,8 +3,12 @@ type ProductType = {
   title: string;
   price: number;
   description: string;
+  category: string;
   image: string;
-  rating: number;
+  rating: {
+    count: number;
+    rate: number;
+  };
 };
 
 export type { ProductType };

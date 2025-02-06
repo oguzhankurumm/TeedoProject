@@ -1,6 +1,7 @@
-import { View, Text } from 'react-native';
+import { View, Text, ActivityIndicator } from 'react-native';
 import { useSelector } from 'react-redux';
 
+import { isLoading } from 'expo-font';
 import { Image } from 'expo-image';
 
 import imagesObject from '_assets/images/imagesObject';
@@ -12,12 +13,11 @@ import useProductDetails from './hooks/useProductDetails.hook';
 const { productPlaceholder } = imagesObject;
 
 const ProductDetails = () => {
-  const {} = useProductDetails();
-
-  const productInfo = useSelector(getSelectedProductInfo);
+  const { productInfo, isLoading, error } = useProductDetails();
 
   const {
     container,
+    loadingContainer,
     productImage,
     productInfoContainer,
     productTitle,
@@ -25,10 +25,18 @@ const ProductDetails = () => {
     productPrice,
   } = styles;
 
-  if (!productInfo) {
+  if (isLoading) {
+    return (
+      <View style={loadingContainer}>
+        <ActivityIndicator size='large' color='#0000ff' />
+      </View>
+    );
+  }
+
+  if (error) {
     return (
       <View style={container}>
-        <Text>Ürün bulunamadı.</Text>
+        <Text>{error instanceof Error ? error.message : 'Bir hata oluştu'}</Text>
       </View>
     );
   }
@@ -45,7 +53,7 @@ const ProductDetails = () => {
         <Text style={productTitle}>{productInfo?.title}</Text>
         <Text style={productPrice}>
           {Intl.NumberFormat('tr-TR', { style: 'currency', currency: 'TRY' }).format(
-            productInfo?.price
+            productInfo?.price || 0
           )}
         </Text>
       </View>

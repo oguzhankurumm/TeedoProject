@@ -2,6 +2,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { configureStore } from '@reduxjs/toolkit';
 import { persistReducer, persistStore } from 'redux-persist';
 
+import { productsApi } from '_services/productServicesdata';
+
 import rootReducer from './rootReducer';
 
 const persistConfig = {
@@ -19,7 +21,7 @@ export const store = configureStore({
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: false, // AsyncStorage ile kullanıldığında hata vermemesi için bu ayarın yapılması gerekmektedir
-    }),
+    }).concat(productsApi.middleware),
 });
 
 export const persistor = persistStore(store);
