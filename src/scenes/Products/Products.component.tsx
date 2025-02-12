@@ -1,7 +1,8 @@
-import { View, Text, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, ActivityIndicator, Platform } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Ionicons } from '@expo/vector-icons';
+import { FlashList } from '@shopify/flash-list';
 import { Image } from 'expo-image';
 
 import { selectCartItems } from '_redux/features/cart/cartSelector';
@@ -54,15 +55,16 @@ const Products = () => {
   }
 
   return (
-    <FlatList
+    <FlashList
       data={productList}
       numColumns={2}
       keyExtractor={item => item.id.toString()}
       contentContainerStyle={contentContainerStyle}
-      columnWrapperStyle={columnWrapperStyle}
+      // columnWrapperStyle={columnWrapperStyle}
       onEndReached={() => {
         handleGetNextItems();
       }}
+      estimatedItemSize={200}
       renderItem={({ item }) => {
         const currentItem = itemsInCart.find(cartItem => cartItem.id === item.id);
 
