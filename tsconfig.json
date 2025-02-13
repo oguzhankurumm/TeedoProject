@@ -30,9 +30,10 @@
       "_scenes/*": ["./src/scenes/*"],
       "_styles/*": ["./src/styles/*"],
       "_types/*": ["./src/types/*"],
-      "_utils/*": ["./src/utils/*"],
       "_data/*": ["./src/data/*"],
       "_services/*data": ["./src/services/*"],
+      "_utils/*": ["./src/utils/*"],
+      "_context/*": ["./src/context/*"],
     }
   },
   "exclude": ["node_modules"]

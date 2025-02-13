@@ -13,6 +13,8 @@ module.exports = {
                     _data: './src/data',
                     _redux: './src/redux',
                     _services: './src/services',
+                    _context: './src/context',
+                    _utils: './src/utils',
                     // Diğer aliaslar buraya eklenebilir
                 },
             },
