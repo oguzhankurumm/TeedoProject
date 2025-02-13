@@ -5,13 +5,23 @@ import { Provider } from 'react-redux';
 
 import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
+import * as Notifications from 'expo-notifications';
 import { StatusBar, StatusBarStyle } from 'expo-status-bar';
 import { PersistGate } from 'redux-persist/integration/react';
 
+import { NotificationProvider } from '_context/NotificationContext';
 import AppNavigator from '_navigations/AppNavigator';
 import { store, persistor } from '_redux/store';
 
 import './gesture-handler';
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: true,
+  }),
+});
 
 export default function App() {
   const navigationRef = useNavigationContainerRef();
@@ -34,20 +44,22 @@ export default function App() {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <Provider store={store}>
-        <PersistGate persistor={persistor} loading={null}>
-          <SafeAreaProvider>
-            <StatusBar style={'auto' as StatusBarStyle} />
-            <NavigationContainer
-              ref={navigatorRef => {
-                navigationRef.current = navigatorRef;
-              }}
-            >
-              <AppNavigator />
-            </NavigationContainer>
-          </SafeAreaProvider>
-        </PersistGate>
-      </Provider>
+      <NotificationProvider>
+        <Provider store={store}>
+          <PersistGate persistor={persistor} loading={null}>
+            <SafeAreaProvider>
+              <StatusBar style={'auto' as StatusBarStyle} />
+              <NavigationContainer
+                ref={navigatorRef => {
+                  navigationRef.current = navigatorRef;
+                }}
+              >
+                <AppNavigator />
+              </NavigationContainer>
+            </SafeAreaProvider>
+          </PersistGate>
+        </Provider>
+      </NotificationProvider>
     </GestureHandlerRootView>
   );
 }

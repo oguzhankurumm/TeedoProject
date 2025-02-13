@@ -41,6 +41,6 @@ export async function registerForPushNotificationsAsync() {
       throw new Error(`${e}`);
     }
   } else {
-    throw new Error('Must use physical device for push notifications');
+    throw new Error('Push bildirimleri sadece gerçek cihazlarda çalışır!');
   }
 }
