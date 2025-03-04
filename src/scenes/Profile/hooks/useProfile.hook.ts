@@ -7,11 +7,11 @@ import { User } from '_types/user';
 
 const useProfile = () => {
   const [userProfileData, setUserProfileData] = useState<User>(null);
-  const endpoint = 'https://fakestoreapi.com/users/2';
+  const endpoint = `${process.env.API_URL}/users/2`;
 
   const createUser = useCallback(async () => {
     try {
-      const createUserResponse = await axios.post('https://fakestoreapi.com/users', {
+      const createUserResponse = await axios.post(`${process.env.API_URL}/users`, {
         email: 'oguzhan@gmail.com',
         username: 'oguzhan',
         password: 'm38rmF$',
@@ -33,7 +33,7 @@ const useProfile = () => {
       } as User);
 
       const getUserData = await axios.get(
-        `https://fakestoreapi.com/users/${createUserResponse.data.id}`
+        `${process.env.API_URL}/users/${createUserResponse.data.id}`
       );
 
       if (getUserData.status === 200) {

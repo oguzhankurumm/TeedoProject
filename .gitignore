@@ -136,3 +136,6 @@ src/assets/icons/.DS_Store
 
 
 NOTES.txt
+google-services.json
+GoogleService-Info.plist
+keystore.jks

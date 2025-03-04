@@ -1,10 +1,11 @@
-import { View, Text, FlatList, TouchableOpacity, ActivityIndicator, Platform } from 'react-native';
+import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Ionicons } from '@expo/vector-icons';
 import { FlashList } from '@shopify/flash-list';
 import { Image } from 'expo-image';
 
+import { useNotification } from '_context/NotificationContext';
 import { selectCartItems } from '_redux/features/cart/cartSelector';
 import { removeFromCart } from '_redux/features/cart/cartSlice';
 
@@ -22,6 +23,8 @@ const Products = () => {
     isLoading,
   } = useProducts();
   const itemsInCart = useSelector(selectCartItems);
+
+  const { expoPushToken, notification, error: pushError } = useNotification();
 
   const {
     container,
@@ -55,72 +58,81 @@ const Products = () => {
   }
 
   return (
-    <FlashList
-      data={productList}
-      numColumns={2}
-      keyExtractor={item => item.id.toString()}
-      contentContainerStyle={contentContainerStyle}
-      // columnWrapperStyle={columnWrapperStyle}
-      onEndReached={() => {
-        handleGetNextItems();
-      }}
-      estimatedItemSize={200}
-      renderItem={({ item }) => {
-        const currentItem = itemsInCart.find(cartItem => cartItem.id === item.id);
+    <View style={{ flex: 1 }}>
+      {/* AŞAĞIDAKİ KOD GELEN BİLDİRİMİ EKRANA BASMAK İÇİN ÖRNEKTİR: */}
+      {notification && (
+        <>
+          <Text>{notification?.request.content.title}</Text>
+          <Text>{JSON.stringify(notification?.request.content.data, null, 2)}</Text>
+        </>
+      )}
+      <FlashList
+        data={productList}
+        numColumns={2}
+        keyExtractor={item => item.id.toString()}
+        contentContainerStyle={contentContainerStyle}
+        // columnWrapperStyle={columnWrapperStyle}
+        onEndReached={() => {
+          handleGetNextItems();
+        }}
+        estimatedItemSize={200}
+        renderItem={({ item }) => {
+          const currentItem = itemsInCart.find(cartItem => cartItem.id === item.id);
 
-        return (
-          <TouchableOpacity
-            key={item.id}
-            activeOpacity={0.8}
-            onPress={() => handleOnProductPress(item)}
-            style={productContainer}
-          >
-            <View>
-              <Image
-                source={{ uri: item.image }}
-                style={productImage}
-                contentFit='cover'
-                transition={50}
-                cachePolicy='memory-disk'
-                contentPosition='center'
-              />
-              {currentItem && currentItem.quantity > 0 ? (
-                <TouchableOpacity
-                  activeOpacity={0.8}
-                  onPress={() => {
-                    dispatch(removeFromCart(item.id));
-                  }}
-                  style={addToCartButton}
-                >
-                  <Ionicons name='trash-outline' size={32} color='#353535' />
-                </TouchableOpacity>
-              ) : (
-                <TouchableOpacity
-                  activeOpacity={0.8}
-                  onPress={() => {
-                    handleAddToCartPress(item);
-                  }}
-                  style={addToCartButton}
-                >
-                  <Ionicons name='add-circle-outline' size={32} color='#353535' />
-                </TouchableOpacity>
-              )}
-            </View>
-            <Text style={productTitle}>{item.title}</Text>
-            <Text style={productDescription}>{item.description}</Text>
-
-            <View style={productBottomInfoContainer}>
-              <Text style={productPrice}>{item.price} TL</Text>
-
-              <View style={productRatingContainer}>
-                <Ionicons name='star' size={16} color='#353535' />
-                <Text style={productRating}>{item.rating.rate}</Text>
+          return (
+            <TouchableOpacity
+              key={item.id}
+              activeOpacity={0.8}
+              onPress={() => handleOnProductPress(item)}
+              style={productContainer}
+            >
+              <View>
+                <Image
+                  source={{ uri: item.image }}
+                  style={productImage}
+                  contentFit='cover'
+                  transition={50}
+                  cachePolicy='memory-disk'
+                  contentPosition='center'
+                />
+                {currentItem && currentItem.quantity > 0 ? (
+                  <TouchableOpacity
+                    activeOpacity={0.8}
+                    onPress={() => {
+                      dispatch(removeFromCart(item.id));
+                    }}
+                    style={addToCartButton}
+                  >
+                    <Ionicons name='trash-outline' size={32} color='#353535' />
+                  </TouchableOpacity>
+                ) : (
+                  <TouchableOpacity
+                    activeOpacity={0.8}
+                    onPress={() => {
+                      handleAddToCartPress(item);
+                    }}
+                    style={addToCartButton}
+                  >
+                    <Ionicons name='add-circle-outline' size={32} color='#353535' />
+                  </TouchableOpacity>
+                )}
               </View>
-            </View>
-          </TouchableOpacity>
-        );
-      }}
-    />
+              <Text style={productTitle}>{item.title}</Text>
+              <Text style={productDescription}>{item.description}</Text>
+
+              <View style={productBottomInfoContainer}>
+                <Text style={productPrice}>{item.price} TL</Text>
+
+                <View style={productRatingContainer}>
+                  <Ionicons name='star' size={16} color='#353535' />
+                  <Text style={productRating}>{item.rating.rate}</Text>
+                </View>
+              </View>
+            </TouchableOpacity>
+          );
+        }}
+      />
+    </View>
   );
 };
 

@@ -4,6 +4,10 @@ import AppFonts from '_styles/typography';
 
 const styles = StyleSheet.create({
   container: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    gap: 10,
     backgroundColor: '#2D2D2D',
     paddingVertical: 5,
     paddingHorizontal: 10,
