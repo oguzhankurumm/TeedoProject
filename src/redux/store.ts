@@ -3,6 +3,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { persistReducer, persistStore } from 'redux-persist';
 
 import { productsApi } from '_services/productServicesdata';
+import { todoApi } from '_services/todoServicesdata';
 
 import rootReducer from './rootReducer';
 
@@ -14,6 +15,8 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
+const apiServices = [productsApi, todoApi].map(api => api.middleware);
+
 export const store = configureStore({
   // rootReducer'ı kullanarak store oluşturur
   reducer: persistedReducer,
@@ -21,7 +24,7 @@ export const store = configureStore({
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: false, // AsyncStorage ile kullanıldığında hata vermemesi için bu ayarın yapılması gerekmektedir
-    }).concat(productsApi.middleware),
+    }).concat(apiServices),
 });
 
 export const persistor = persistStore(store);

@@ -1,9 +1,11 @@
 import { View, Text, FlatList } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { useNavigation } from '@react-navigation/native';
 import { Image } from 'expo-image';
 
 import { CustomButton } from '_atoms';
+import Scenes from '_navigations/Scenes';
 import {
   selectCartItems,
   selectCartTotalPrice,
@@ -14,6 +16,7 @@ import { removeFromCart, updateQuantity } from '_redux/features/cart/cartSlice';
 import styles from './Cart.style';
 
 const Cart = () => {
+  const navigation = useNavigation();
   const dispatch = useDispatch();
 
   const cartItems = useSelector(selectCartItems);
@@ -32,6 +35,7 @@ const Cart = () => {
     cartQuantityContainer,
     listEmptyContainer,
     listHeaderContainer,
+    orderButtonContainer,
   } = styles;
 
   return (
@@ -55,6 +59,19 @@ const Cart = () => {
             }).format(totalPrice)}{' '}
           </Text>
         </View>
+      }
+      ListFooterComponent={
+        <>
+          {cartItems.length > 0 && (
+            <CustomButton
+              title='Ödeme Ekranına Geç'
+              overrideContainerStyle={orderButtonContainer}
+              onPress={() => {
+                navigation.navigate(Scenes.order);
+              }}
+            />
+          )}
+        </>
       }
       renderItem={({ item }) => {
         return (

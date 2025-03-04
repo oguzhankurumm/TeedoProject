@@ -28,7 +28,7 @@
     "web": {
       "favicon": "./src/assets/app/favicon.png"
     },
-    "plugins": [["expo-font"]],
+    "plugins": ["expo-font"],
     "extra": {
       "eas": {
         "projectId": "22109747-bd3e-4cb2-a9b7-92b99a73f871"
