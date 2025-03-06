@@ -154,6 +154,7 @@ const Order = () => {
         </View>
 
         <CustomButton
+          testId='submit-order'
           title={
             isSubmitting
               ? 'İşleniyor...'

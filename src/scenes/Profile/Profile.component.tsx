@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { View, Text } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { CustomButton } from '_atoms';
+import { CustomButton, CustomView } from '_atoms';
 import { fetchProducts } from '_redux/features/product/productSlice';
 import { RootState } from '_redux/store';
 import { AppDispatch } from '_redux/store';
@@ -31,7 +31,11 @@ const Profile = () => {
         Hoşgeldin {userProfileData?.name?.firstname} {userProfileData?.name?.lastname}
       </Text>
 
+      <CustomView testId='custom-view' overrideContainerStyle={{ backgroundColor: 'red' }}>
+        <Text>Custom View</Text>
+      </CustomView>
       <CustomButton
+        testId='add-todo-button'
         isLoading={isLoading}
         title='Todo Oluşturmak İçin Tıkla'
         onPress={() =>
@@ -43,7 +47,11 @@ const Profile = () => {
         }
       />
       {isError && <Text>Bir hata oluştu</Text>}
-      <CustomButton title='Kullanıcı Oluşturmak İçin Tıkla' onPress={createUser} />
+      <CustomButton
+        testId='create-user-button'
+        title='Kullanıcı Oluşturmak İçin Tıkla'
+        onPress={createUser}
+      />
     </View>
   );
 };
