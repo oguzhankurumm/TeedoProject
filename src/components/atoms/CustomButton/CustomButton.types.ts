@@ -6,6 +6,7 @@ type CustomButtonProps = {
   isLoading?: boolean;
   disabled?: boolean;
   overrideContainerStyle?: ViewStyle;
+  testId?: string;
 };
 
 export type { CustomButtonProps };

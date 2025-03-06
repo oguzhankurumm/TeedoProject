@@ -64,6 +64,7 @@ const Cart = () => {
         <>
           {cartItems.length > 0 && (
             <CustomButton
+              testId='go-to-order-screen'
               title='Ödeme Ekranına Geç'
               overrideContainerStyle={orderButtonContainer}
               onPress={() => {
@@ -101,17 +102,20 @@ const Cart = () => {
 
             <View style={cartBottomActionsContainer}>
               <CustomButton
+                testId={`remove-from-cart-${item.id}`}
                 title='Sepetten Çıkar'
                 onPress={() => dispatch(removeFromCart(item.id))}
               />
 
               <View style={cartQuantityContainer}>
                 <CustomButton
+                  testId={`decrease-quantity-${item.id}`}
                   title='-'
                   onPress={() => dispatch(updateQuantity({ id: item.id, change: -1 }))}
                 />
                 <Text>{item.quantity}</Text>
                 <CustomButton
+                  testId={`increase-quantity-${item.id}`}
                   title='+'
                   onPress={() => dispatch(updateQuantity({ id: item.id, change: 1 }))}
                 />
