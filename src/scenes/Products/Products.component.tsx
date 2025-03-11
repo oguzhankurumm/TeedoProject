@@ -2,12 +2,14 @@ import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Ionicons } from '@expo/vector-icons';
+import crashlytics from '@react-native-firebase/crashlytics';
+import * as Sentry from '@sentry/react-native';
 import { FlashList } from '@shopify/flash-list';
 import { Image } from 'expo-image';
 
+import { CustomButton } from '_atoms';
 import { useNotification } from '_context/NotificationContext';
 import { selectCartItems } from '_redux/features/cart/cartSelector';
-import { removeFromCart } from '_redux/features/cart/cartSlice';
 
 import styles from './Products.style';
 import useProducts from './hooks/useProducts.hook';
@@ -18,6 +20,7 @@ const Products = () => {
     productList,
     handleOnProductPress,
     handleAddToCartPress,
+    handleRemoveFromCartPress,
     handleGetNextItems,
     error,
     isLoading,
@@ -60,6 +63,19 @@ const Products = () => {
   return (
     <View style={{ flex: 1 }}>
       {/* AŞAĞIDAKİ KOD GELEN BİLDİRİMİ EKRANA BASMAK İÇİN ÖRNEKTİR: */}
+      <CustomButton
+        title='Test Sentry'
+        onPress={() => {
+          Sentry.captureException(new Error('Second error'));
+        }}
+      />
+
+      <CustomButton
+        title='Test Crashlytics'
+        onPress={() => {
+          crashlytics().recordError(new Error('Test Crash'));
+        }}
+      />
       {notification && (
         <>
           <Text>{notification?.request.content.title}</Text>
@@ -99,7 +115,7 @@ const Products = () => {
                   <TouchableOpacity
                     activeOpacity={0.8}
                     onPress={() => {
-                      dispatch(removeFromCart(item.id));
+                      handleRemoveFromCartPress(item);
                     }}
                     style={addToCartButton}
                   >
