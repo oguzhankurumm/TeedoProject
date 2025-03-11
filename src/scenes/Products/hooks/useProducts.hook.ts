@@ -1,16 +1,15 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { addDoc, collection, getDocs, query } from 'firebase/firestore';
 
 import Scenes from '_navigations/Scenes';
-import { addToCart } from '_redux/features/cart/cartSlice';
+import { addToCart, removeFromCart } from '_redux/features/cart/cartSlice';
 import { selectProduct } from '_redux/features/product/productSlice';
 import { useGetProductsQuery } from '_services/productServicesdata';
 import { ProductType } from '_types/product';
-import { db, productsRef } from '_utils/firebase';
+import { analytics } from '_utils/firebase';
 
 const useProducts = () => {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
@@ -28,6 +27,32 @@ const useProducts = () => {
 
   const handleAddToCartPress = useCallback((item: ProductType) => {
     dispatch(addToCart({ ...item, quantity: 1 }));
+    analytics.logEvent('add_to_cart', {
+      id: item.id,
+      title: item.title,
+      price: item.price,
+      description: item.description,
+      category: item.category,
+      image: item.image,
+      rating: item.rating.rate,
+    });
+  }, []);
+
+  const handleRemoveFromCartPress = useCallback((item: ProductType) => {
+    dispatch(removeFromCart(item.id));
+    analytics.logRemoveFromCart({
+      items: [
+        {
+          item_name: item.title,
+          item_id: item.id.toString(),
+          item_category: item.category,
+          price: item.price,
+          quantity: 1,
+        },
+      ],
+      currency: 'TRY',
+      value: item.price,
+    });
   }, []);
 
   const handleOnProductPress = useCallback(
@@ -69,6 +94,7 @@ const useProducts = () => {
     handleGetNextItems,
     handleOnProductPress,
     handleAddToCartPress,
+    handleRemoveFromCartPress,
     error,
     isLoading,
   };

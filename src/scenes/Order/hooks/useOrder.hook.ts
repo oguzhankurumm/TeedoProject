@@ -1,5 +1,4 @@
-import { useMemo } from 'react';
-import { useForm, FieldError } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -7,11 +6,16 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigation } from '@react-navigation/native';
 import { z } from 'zod';
 
+import { selectCartItems, selectCartTotalPrice } from '_redux/features/cart/cartSelector';
 import { clearCart } from '_redux/features/cart/cartSlice';
+import { analytics } from '_utils/firebase';
 
 const useOrder = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+
+  const cartItems = useSelector(selectCartItems);
+  const totalPrice = useSelector(selectCartTotalPrice);
 
   interface PaymentOption {
     value: OrderFormData['paymentMethod'];
@@ -84,6 +88,18 @@ const useOrder = () => {
       reset();
       dispatch(clearCart());
       navigation.goBack();
+      analytics.logPurchase({
+        items: cartItems.map(item => ({
+          id: item.id,
+          title: item.title,
+          quantity: item.quantity,
+          price: item.price,
+        })),
+        currency: 'TRY',
+        value: totalPrice,
+      });
+
+      //init payment
       Alert.alert('Tebrikler', 'Siparişiniz alınmıştır.');
     } catch (error) {
       console.log('Error:', error);

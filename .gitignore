@@ -139,3 +139,4 @@ NOTES.txt
 google-services.json
 GoogleService-Info.plist
 keystore.jks
+.env.local
