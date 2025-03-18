@@ -1,5 +1,6 @@
 import { initializeAnalytics } from '@react-native-firebase/analytics';
 import { initializeApp } from '@react-native-firebase/app';
+import { getAuth } from '@react-native-firebase/auth';
 import { collection, getFirestore } from '@react-native-firebase/firestore';
 
 const firebaseConfig = {
@@ -15,6 +16,7 @@ const firebaseConfig = {
 // Initialize Firebase
 
 export const app = initializeApp(firebaseConfig);
+export const auth = getAuth(app);
 
 // Initialize Firebase Analytics
 export const analytics = initializeAnalytics(app);

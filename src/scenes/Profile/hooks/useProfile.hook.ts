@@ -1,80 +1,18 @@
-import { useCallback, useEffect, useState } from 'react';
-import { Alert } from 'react-native';
+import { useCallback } from 'react';
 
-import axios, { isAxiosError } from 'axios';
+import { useNavigation } from '@react-navigation/native';
 
-import { User } from '_types/user';
+import Scenes from '_navigations/Scenes';
 
 const useProfile = () => {
-  const [userProfileData, setUserProfileData] = useState<User>(null);
-  const endpoint = `${process.env.API_URL}/users/2`;
+  const navigation = useNavigation();
 
-  const createUser = useCallback(async () => {
-    try {
-      const createUserResponse = await axios.post(`${process.env.API_URL}/users`, {
-        email: 'oguzhan@gmail.com',
-        username: 'oguzhan',
-        password: 'm38rmF$',
-        name: {
-          firstname: 'Oğuzhan',
-          lastname: 'Kurum',
-        },
-        address: {
-          city: 'kilcoole',
-          street: '7835 new road',
-          number: 3,
-          zipcode: '12926-3874',
-          geolocation: {
-            lat: '-37.3159',
-            long: '81.1496',
-          },
-        },
-        phone: '1-570-236-7033',
-      } as User);
-
-      const getUserData = await axios.get(
-        `${process.env.API_URL}/users/${createUserResponse.data.id}`
-      );
-
-      if (getUserData.status === 200) {
-        setUserProfileData(getUserData.data);
-        Alert.alert('Kullanıcı Başarıyla Oluşturuldu');
-      }
-    } catch (error) {
-      if (isAxiosError(error)) {
-        Alert.alert(error.response?.data?.message);
-      } else {
-        console.error('An error occurred');
-      }
-    }
-  }, []);
-
-  const fetchProfile = useCallback(async () => {
-    try {
-      const response = await axios.get(endpoint);
-
-      if (response.status === 200) {
-        console.log(response.data);
-        setUserProfileData(response.data);
-      } else {
-        Alert.alert(response.statusText);
-      }
-    } catch (error) {
-      if (isAxiosError(error)) {
-        console.error(error);
-      } else {
-        console.error('An error occurred');
-      }
-    }
-  }, [endpoint]);
-
-  useEffect(() => {
-    fetchProfile();
-  }, [fetchProfile]);
+  const goToLoginScreen = useCallback(() => {
+    navigation.navigate(Scenes.login);
+  }, [navigation]);
 
   return {
-    userProfileData,
-    createUser,
+    goToLoginScreen,
   };
 };
 

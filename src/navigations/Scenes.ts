@@ -1,4 +1,5 @@
 const Scenes = {
+  login: 'Login',
   profile: 'Profile',
   products: 'Products',
   productDetails: 'ProductDetails',

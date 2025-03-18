@@ -2998,6 +2998,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-firebase/auth@npm:^21.12.0":
+  version: 21.12.0
+  resolution: "@react-native-firebase/auth@npm:21.12.0"
+  dependencies:
+    plist: ^3.1.0
+  peerDependencies:
+    "@react-native-firebase/app": 21.12.0
+    expo: ">=47.0.0"
+  peerDependenciesMeta:
+    expo:
+      optional: true
+  checksum: 070fe4d13ca7ef4165553214df1d0a8eaa65d0648aaa94e6226e8304fb051713fe56a7dcaad53f21bf5463640b48e9eea73915bc5b7ce7a014e1297d20090e4a
+  languageName: node
+  linkType: hard
+
 "@react-native-firebase/crashlytics@npm:^21.12.0":
   version: 21.12.0
   resolution: "@react-native-firebase/crashlytics@npm:21.12.0"
@@ -9335,7 +9350,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"plist@npm:^3.0.5":
+"plist@npm:^3.0.5, plist@npm:^3.1.0":
   version: 3.1.0
   resolution: "plist@npm:3.1.0"
   dependencies:
@@ -10958,6 +10973,7 @@ __metadata:
     "@react-native-async-storage/async-storage": 1.23.1
     "@react-native-firebase/analytics": ^21.12.0
     "@react-native-firebase/app": ^21.12.0
+    "@react-native-firebase/auth": ^21.12.0
     "@react-native-firebase/crashlytics": ^21.12.0
     "@react-native-firebase/firestore": ^21.12.0
     "@react-native-masked-view/masked-view": ^0.3.2
